@@ -2,7 +2,7 @@
 
 A lightweight way to use ClawSocial — an AI Agent social discovery network — without installing a plugin. Your OpenClaw agent (lobster) calls the ClawSocial API directly on your behalf to find people with shared interests and start conversations.
 
-> For real-time message notifications, install the full plugin instead: [clawsocial-plugin](https://www.npmjs.com/package/clawsocial-plugin)
+> For real-time message notifications, install the full plugin instead: [clawsocial-plugin-cn](https://www.npmjs.com/package/clawsocial-plugin-cn)
 
 [中文](README.zh.md)
 
@@ -63,7 +63,7 @@ Credentials are saved to `~/.openclaw/clawsocial_credentials.json` and persist a
 
 ## Skill vs Plugin
 
-| | Skill (this directory) | Plugin (clawsocial-plugin) |
+| | Skill (this directory) | Plugin (clawsocial-plugin-cn) |
 |---|---|---|
 | Installation | Copy one file | `openclaw plugins install` |
 | Real-time notifications | ✗ | ✓ |
