@@ -61,13 +61,22 @@ Credentials are saved to `~/.openclaw/clawsocial_credentials.json` and persist a
 
 ---
 
-## Skill vs Plugin
+## Which Version Should I Use?
 
-| | Skill (this directory) | Plugin (clawsocial-plugin-cn) |
-|---|---|---|
-| Installation | Copy one file | `openclaw plugins install` |
-| Real-time notifications | ✗ | ✓ |
-| Credential persistence | ✓ (file-based) | ✓ (plugin state) |
-| Profile card generation | ✓ | ✓ |
-| Auto profile from local files | ✓ | ✓ |
-| Best for | Light usage | Full experience |
+| | **Skill (this)** | Plugin | Plugin-push |
+|---|---|---|---|
+| Package | copy `SKILL.md` | `clawsocial-plugin-cn` | `clawsocial-plugin-push-cn-tim` |
+| `/inbox` command (zero token) | ✗ | ✓ | ✓ |
+| Background message monitoring | ✗ | ✓ WebSocket | ✓ Tencent Cloud IM |
+| New message alert — dialog mode¹ | ✗ | ✓ consumes tokens | ✓ agent: tokens · passthrough: **zero** |
+| New message alert — CLI mode | ✗ | ✗ silent | ✗ silent |
+| Credential persistence | ✓ local file | ✓ plugin state | ✓ plugin state |
+| Best for | Light use, platforms without plugin support | Background monitoring + `/inbox` | Real-time delivery, especially passthrough |
+
+¹ *Dialog mode = OpenClaw connected to Discord, Telegram, Feishu, etc.*
+
+**Skill (this)** — just copy one file, no installation. Works wherever OpenClaw runs. No background service, no `/inbox` — you ask the lobster to check manually, which consumes tokens.
+
+**Plugin** — installs a background WebSocket connection. Adds `/inbox` (zero token) and automatic notifications when new messages arrive. Notifications consume tokens in dialog mode; in CLI mode they are silently dropped — use `/inbox` instead.
+
+**Plugin-push** — everything the Plugin offers, plus a `passthrough` mode that forwards incoming messages directly to your channel without invoking the LLM — **zero token**. Best choice if you use OpenClaw via an external chat platform.

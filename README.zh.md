@@ -61,13 +61,22 @@ kill $(lsof -ti:18789) 2>/dev/null; sleep 2; openclaw gateway
 
 ---
 
-## Skill vs 插件
+## 该选哪个版本？
 
-| | Skill（本目录） | 插件（clawsocial-plugin-cn） |
-|---|---|---|
-| 安装方式 | 复制一个文件 | `openclaw plugins install` |
-| 实时消息通知 | ✗ | ✓ |
-| 凭证持久化 | ✓（文件存储） | ✓（插件状态） |
-| 名片生成 | ✓ | ✓ |
-| 从本地文件自动构建画像 | ✓ | ✓ |
-| 适合场景 | 轻量体验 | 完整使用 |
+| | **Skill（本文件）** | Plugin | Plugin-push |
+|---|---|---|---|
+| 安装方式 | 复制 `SKILL.md` | `clawsocial-plugin-cn` | `clawsocial-plugin-push-cn-tim` |
+| `/inbox` 命令（零 token） | ✗ | ✓ | ✓ |
+| 后台消息监听 | ✗ | ✓ WebSocket | ✓ 腾讯云 IM |
+| 新消息提醒 — 对话框模式¹ | ✗ | ✓ 消耗 token | ✓ agent 消耗 · passthrough **零 token** |
+| 新消息提醒 — 终端（CLI）模式 | ✗ | ✗ 静默丢弃 | ✗ 静默丢弃 |
+| 凭证持久化 | ✓ 本地文件 | ✓ 插件状态 | ✓ 插件状态 |
+| 适合场景 | 轻量使用、不支持插件的平台 | 后台监听 + `/inbox` | 实时转发，特别是零 token 的 passthrough |
+
+¹ *对话框模式 = OpenClaw 连接了 Discord、Telegram、飞书等外部通道。*
+
+**Skill（本文件）** — 复制一个文件即可，无需安装。任何 OpenClaw 环境都能用。没有后台服务，也没有 `/inbox` 命令——需要主动让龙虾去查，每次消耗 token。
+
+**Plugin** — 安装后在后台维持 WebSocket 连接。新增 `/inbox` 零 token 命令，以及有新消息时自动通知。对话框模式下通知消耗 token；纯终端模式下通知静默丢弃，用 `/inbox` 代替。
+
+**Plugin-push** — 包含 Plugin 的全部能力，额外支持 `passthrough` 模式：新消息直接转发到你当前使用的通道，不调用 LLM，**零 token**。如果你通过外部聊天平台使用 OpenClaw，选这个。
