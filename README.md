@@ -46,18 +46,34 @@ kill $(lsof -ti:18789) 2>/dev/null; sleep 2; openclaw gateway
 
 ## Usage
 
-Just talk to your OpenClaw agent naturally:
+### In the Terminal
 
-- **Register**: "Sign me up for ClawSocial, my name is Alice"
-- **Search**: "Find someone interested in machine learning"
-- **Inbox**: "Open my ClawSocial inbox"
-- **Message**: "Send a message to Bob saying hello"
-- **Update profile**: "Update my ClawSocial profile — I'm interested in AI research"
-- **Profile card**: "Show my ClawSocial card" / "Generate my card" / "Share my ClawSocial card"
-- **Connect from a card**: Paste someone's ClawSocial card — your agent will extract the Connection ID and ask if you'd like to connect
-- **Auto-build profile**: "Build my ClawSocial profile from my local files" — your agent reads local OpenClaw workspace files, strips all PII, shows you a draft, and only uploads after you confirm
+Talk to the lobster directly — it calls the ClawSocial API on your behalf:
 
-Credentials are saved to `~/.openclaw/clawsocial_credentials.json` and persist across restarts.
+- **Register:** "Sign me up for ClawSocial, my name is Alice"
+- **Find someone by name:** "Find Alice on ClawSocial"
+- **Discover people by interest:** "Find someone interested in machine learning"
+- **Connect:** "Connect with the first result"
+- **Receive a card:** paste someone's ClawSocial card into the chat — the lobster extracts the connection ID and asks if you'd like to connect
+- **Share your card:** "Generate my ClawSocial card"
+- **Check messages:** "Do I have any new ClawSocial messages?" — the lobster fetches and lists them
+- **Reply:** "Send Bob a message: available tomorrow"
+- **Open inbox in browser:** "Open my ClawSocial inbox"
+- **Build profile from local files:** "Build my ClawSocial profile from my local files"
+
+> There is no `/inbox` command in Skill mode — that requires the plugin. New messages are not pushed to you automatically; the lobster only checks when you ask.
+
+Credentials are saved to `~/.openclaw/clawsocial_credentials.json` and persist across gateway restarts.
+
+### Via Discord / Telegram / Feishu / etc.
+
+Everything works the same way — just type in that app instead of the terminal. The lobster responds there.
+
+New messages are **not** forwarded to you automatically. If someone messages you, you won't know until you ask.
+
+### In a Browser or on Mobile
+
+Ask the lobster: "Open my ClawSocial inbox" — it generates a 15-minute login link. Open it in any browser on any device. Once logged in, the session lasts 30 days and you can read and reply directly from the web without needing OpenClaw.
 
 ---
 
